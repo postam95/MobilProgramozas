@@ -37,16 +37,19 @@ class NotesListAdapter(var notes: ArrayList<Note>, val actions: ListAction): Rec
         private val noteTitle = view.title
         private val noteContent = view.content
         private val noteDate = view.date
+        private val noteWords = view.wordCount
 
         fun bind(note: Note)    {
             noteTitle.text = note.title
             noteContent.text = note.content
 
-            val simpleDateFormat = SimpleDateFormat("yyyy.MMM.dd., HH:mm:ss")
+            val simpleDateFormat = SimpleDateFormat("yyyy.MMMdd., HH:mm:ss")
             val resultDate = Date(note.updateTime)
             noteDate.text = "Last updated: ${simpleDateFormat.format(resultDate)}"
 
             layout.setOnClickListener{ actions.onClick(note.id) }
+
+            noteWords.text = "Number of words: ${note.wordCount}"
         }
     }
 
